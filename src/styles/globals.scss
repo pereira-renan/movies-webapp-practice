@@ -1,0 +1,23 @@
+$main-background: #4e4e4e;
+$main-font: #4e4e4e;
+$main-accent: #4e4e4e;
+
+html,
+body {
+  height: 80vh;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-color: #4e4e4e;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
