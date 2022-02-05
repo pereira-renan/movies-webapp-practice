@@ -29,8 +29,8 @@ export default function Home({ movies, favorites }) {
         <div className={styles.list}>
           <Grid
             justifyItems="center"
-            templateColumns="repeat(5, 0.2fr)"
-            gap={6}
+            templateColumns="repeat(5, 0.16fr)"
+            gap={100}
           >
             {movies.map((movie, i) => (
               <MoviesList movie={movie} key={i} />

@@ -54,6 +54,7 @@ export default async function handler(req, res) {
           { email: "souzapereira.renan@gmail.com" },
           { $pull: { favorites: movieId } }
         )
+
       return res.json({
         message: "Favorite removed successfully",
         success: true,

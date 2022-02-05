@@ -66,6 +66,9 @@ export default function Header() {
               <a className={styles.button} href={`/`}>
                 Home
               </a>
+              <a className={styles.button} href={`/api`}>
+                Challenge 3
+              </a>
             </>
           )}
         </p>

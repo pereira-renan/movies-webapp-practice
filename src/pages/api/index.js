@@ -19,7 +19,10 @@ export default async function handler(req, res) {
     try {
       let db = await connectDb()
       let data = await db.collection("metadata").findOne({})
-      console.log(data)
+      let dateNow = new Date().toLocaleDateString()
+      let timeNow = new Date().toLocaleTimeString()
+      data["dateExecuted"] = dateNow
+      data["timeTime"] = timeNow
 
       return res.status(200).json({
         message: data,

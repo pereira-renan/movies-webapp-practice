@@ -5,6 +5,18 @@ import { BsHeart, BsHeartFill } from "react-icons/bs"
 import { useRouter } from "next/router"
 import { useSession } from "next-auth/react"
 import { AiFillStar } from "react-icons/ai"
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverHeader,
+  PopoverBody,
+  PopoverFooter,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverAnchor,
+  Button,
+} from "@chakra-ui/react"
 
 // The approach used in this component shows how to build a sign in and sign out
 // component that works on pages which support both client and server side
@@ -40,6 +52,19 @@ export default function MoviesList({ movie }) {
       <div className={styles.poster}>
         <img src={moviePosterSrc()}></img>
       </div>
+      <Popover>
+        <PopoverTrigger>
+          <Button>Details</Button>
+        </PopoverTrigger>
+        <PopoverContent>
+          <PopoverArrow />
+          <PopoverCloseButton />
+          <PopoverHeader>Confirmation!</PopoverHeader>
+          <PopoverBody>
+            Are you sure you want to have that milkshake?
+          </PopoverBody>
+        </PopoverContent>
+      </Popover>
       <div className={styles.text}>{movie.original_title}</div>
       <div className={styles.text}>{movie.release_date.split("-")[0]}</div>
       <div className={styles.stars}>

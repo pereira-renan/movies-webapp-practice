@@ -6,15 +6,13 @@ import { BsHeart, BsHeartFill } from "react-icons/bs"
 // component that works on pages which support both client and server side
 // rendering, and avoids any flash incorrect content on initial page load.
 
-async function getMovie(favorite) {
+async function removeFavorite(favorite) {
   try {
+    console.log(favorite)
     // Update post
-    await fetch(
-      `https://api.themoviedb.org/3/movie/${favorite}?api_key=8353351ab4cc562ce1cfced2e08dfd66&language=en-US`,
-      {
-        method: "POST",
-      }
-    )
+    await fetch(`http://localhost:/api/${favorite}`, {
+      method: "DELETE",
+    })
 
     // reload the page
     return router.push(router.asPath)
@@ -34,7 +32,7 @@ export default function FavoriteMovies({ favorite }) {
       <div className={styles.favorite}>
         <BsHeartFill color="grey" size={heartSize} />
       </div>
-      <div className={styles.favorite} onClick={() => addFavorite(movie["id"])}>
+      <div className={styles.favorite} onClick={() => removeFavorite(favorite)}>
         <a>
           <BsHeart size={heartSize} />
         </a>
