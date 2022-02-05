@@ -3,7 +3,6 @@
   display: flex;
   width: 200px;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   color: white;
   position: relative;
@@ -26,4 +25,15 @@
   right: 10px;
   z-index: 999;
   cursor: pointer;
+}
+
+.stars {
+  position: absolute;
+  color: white;
+  top: 10px;
+  left: 10px;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.274);
+  text-align: center;
+  width: 50px;
 }

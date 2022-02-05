@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react"
 import FavoriteMovies from "../components/FavoriteMovies"
 import { Grid, GridItem } from "@chakra-ui/react"
 
-export default function Home({ movies }) {
+export default function Home({ movies, favorites }) {
   const { data: session, status } = useSession()
   return (
     <div className={styles.container}>
@@ -19,6 +19,12 @@ export default function Home({ movies }) {
       <Header />
 
       <main>
+        <div class="search">
+          <input type="text" class="searchTerm" placeholder="Search"></input>
+          <button type="submit" class="searchButton">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
         <h1 className={styles.appTitle}>Welcome to Movie Mania!</h1>
         <div className={styles.list}>
           <Grid
@@ -31,7 +37,19 @@ export default function Home({ movies }) {
             ))}
           </Grid>
         </div>
-        {session ? <FavoriteMovies /> : ""}
+        {session ? (
+          <>
+            <h1>Your Favorites</h1>
+            {favorites.map((favorite, i) => (
+              <FavoriteMovies favorite={favorite} key={i} />
+            ))}
+          </>
+        ) : (
+          <>
+            <h1>Your Favorites</h1>
+            <h2>You are not logged in.</h2>
+          </>
+        )}
       </main>
     </div>
   )
@@ -45,13 +63,19 @@ export async function getServerSideProps(ctx) {
       method: "GET",
     }
   )
+
+  let addedFavorites = await fetch(`http://localhost:3000/api/favorites`, {
+    method: "GET",
+  })
+
   // extract the data
   let data = await response.json()
-  console.log(data.results)
+  let dataFavorites = await addedFavorites.json()
 
   return {
     props: {
       movies: data.results,
+      favorites: dataFavorites.message,
     },
   }
 }

@@ -35,6 +35,9 @@ export default function Header() {
               >
                 Sign in
               </a>
+              <a className={styles.buttonPrimary} href={`/`}>
+                Home
+              </a>
             </>
           )}
           {session && (
@@ -59,6 +62,9 @@ export default function Header() {
                 }}
               >
                 Sign out
+              </a>
+              <a className={styles.button} href={`/`}>
+                Home
               </a>
             </>
           )}
