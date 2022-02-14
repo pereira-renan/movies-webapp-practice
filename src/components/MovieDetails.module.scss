@@ -1,0 +1,106 @@
+.movie {
+  display: flex;
+  flex-direction: row;
+  -webkit-animation: fadeIn 1s ease-in-out;
+  -moz-animation: fadeIn 1s ease-in-out;
+  -o-animation: fadeIn 1s ease-in-out;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.poster {
+  max-height: 80vh;
+  min-width: 500px;
+}
+.poster > img {
+  max-height: inherit;
+  border-radius: 20px;
+}
+
+.movieDetails__div {
+  border: solid 1px;
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  overflow: auto;
+  max-height: 80vh;
+  justify-content: space-between;
+}
+
+.heading {
+  color: brown;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.text {
+  font-size: 1.5rem;
+}
+
+.detailsFooter {
+  display: flex;
+  justify-content: space-between;
+}
+
+.icons {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.likeIcon {
+  cursor: pointer;
+}
+
+.likeIcon:hover {
+  color: red;
+}
+
+.backArrowIcon {
+  cursor: pointer;
+}
+
+.backArrowIcon:hover {
+  color: green;
+}
+
+.rightBottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-moz-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-o-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

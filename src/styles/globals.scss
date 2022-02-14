@@ -8,9 +8,7 @@ body {
   width: 100%;
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  background-color: #4e4e4e;
+  font-family: Roboto;
 }
 
 a {
@@ -28,4 +26,40 @@ label {
 
 input .searchBar {
   width: 400px;
+}
+
+.appTitle {
+  font-weight: normal;
+}
+
+.button,
+.buttonPrimary {
+  border-radius: 0.3rem;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1.4rem;
+  background-color: transparent;
+  color: #555;
+}
+
+.buttonPrimary {
+  background-color: #346df1;
+  border-color: #346df1;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.7rem 1.4rem;
+  height: 10px;
+}
+
+.buttonPrimary:hover {
+  box-shadow: inset 0 0 5rem #8298cc;
+}
+
+.buttonSecondary {
+  background-color: #303030;
+  border-color: #303030;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.7rem 1.4rem;
+  height: 10px;
 }

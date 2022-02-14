@@ -12,60 +12,50 @@ import {
   Container,
   Stack,
 } from "@chakra-ui/react"
-import styles from "../../styles/Home.module.css"
+import styles from "../../styles/SignIn.module.scss"
+import Header from "../../components/header"
 
 export default function SignIn({ providers, csrfToken }) {
   return (
-    <Layout>
-      <Container maxW="xl" centerContent>
-        <Heading color="white" as="h1" textAlign="center">
-          Welcome to your Movie Mania page!
-        </Heading>
-        <Box
-          textAlign="center"
-          alignContent="center"
-          justifyContent="center"
-          marginTop={12}
-        >
-          <Box className="email-form">
-            <form method="post" action="/api/auth/signin/email">
-              <Input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+    <div className={styles.page__container}>
+      <Header />
+      <div className="appTitle">
+        <h1>Welcome to your Movie Mania page!</h1>
+      </div>
+      <div>
+        <form method="post" action="/api/auth/signin/email">
+          <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+          <label>
+            <div color="white">Log in using your address</div>
+            <br />
+            <input type="text" id="email" name="email" />
+          </label>
+          <button type="submit" className="buttonPrimary">
+            Sign in
+          </button>
+        </form>
+        {Object.values(providers).map((provider) => {
+          if (provider.name === "Email") {
+            return
+          }
+          return (
+            <>
               <label>
-                <div color="white">Log in using your address</div>
-                <br />
-                <Input type="text" id="email" name="email" />
+                <div color="white">
+                  or login with your social media
+                  <br />
+                </div>
               </label>
-              <Button type="submit">Sign in</Button>
-            </form>
-          </Box>
-          <Stack justifyContent="center" isInline marginTop={12}>
-            {Object.values(providers).map((provider) => {
-              if (provider.name === "Email") {
-                return
-              }
-              return (
-                <>
-                  <label>
-                    <div color="white">
-                      or login with your social media
-                      <br />
-                    </div>
-                  </label>
-                  <Box key={provider.name}>
-                    <Button
-                      variant="outline"
-                      onClick={() => signIn(provider.id)}
-                    >
-                      Sign in with {provider.name}
-                    </Button>
-                  </Box>
-                </>
-              )
-            })}
-          </Stack>
-        </Box>
-      </Container>
-    </Layout>
+              <Box key={provider.name}>
+                <Button variant="outline" onClick={() => signIn(provider.id)}>
+                  Sign in with {provider.name}
+                </Button>
+              </Box>
+            </>
+          )
+        })}
+      </div>
+    </div>
   )
 }
 

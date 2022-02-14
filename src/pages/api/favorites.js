@@ -14,6 +14,7 @@ export default async function handler(req, res) {
     }
   }
 
+  console.log(session)
   // Getting all posts.
   async function getFavorites(req, res) {
     try {

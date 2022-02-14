@@ -27,7 +27,7 @@ export default function Header() {
               </span>
               <a
                 href={`/auth/signin`}
-                className={styles.buttonPrimary}
+                className="buttonPrimary"
                 onClick={(e) => {
                   e.preventDefault()
                   signIn()
@@ -35,7 +35,7 @@ export default function Header() {
               >
                 Sign in
               </a>
-              <a className={styles.buttonPrimary} href={`/`}>
+              <a className="buttonPrimary" href={`/`}>
                 Home
               </a>
             </>
