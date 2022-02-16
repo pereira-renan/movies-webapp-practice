@@ -7,36 +7,57 @@ import { useSession } from "next-auth/react"
 import FavoriteMovies from "../components/FavoriteMovies"
 import { Grid, GridItem } from "@chakra-ui/react"
 import { useRouter } from "next/router"
-import { useState, useRef, createContext } from "react"
+import { useContext, useEffect } from "react"
 import MovieDetails from "../components/MovieDetails"
+import { MoviesContext, MoviesProvider } from "./context"
 
-const FavoriteContext = createContext()
-
-function FavoriteProvider({ children }) {
-  const [favorites, setFavorites] = useState([])
-
+export default function Home({ movies }) {
   return (
-    <FavoriteContext.Provider value={{ favorites, setFavorites }}>
-      {children}
-    </FavoriteContext.Provider>
+    <MoviesProvider>
+      <HomeContent movies={movies} />
+    </MoviesProvider>
   )
 }
 
-export default function Home({ movies }) {
-  const [viewDetails, setViewDetails] = useState(false)
-  const [details, setDetails] = useState({})
-  const selectedFavorite = useRef({})
+function HomeContent({ movies, userFavorites }) {
+  const { viewDetails, setViewDetails } = useContext(MoviesContext)
+  const { details, setDetails } = useContext(MoviesContext)
+  const selectedFavorite = useContext(MoviesContext)
+  const { favorites, setFavorites } = useContext(MoviesContext)
   const { data: session } = useSession()
+  const { catalog, setCatalog } = useContext(MoviesContext)
 
-  function handleFavorites(newFavorite) {
-    console.log("lista")
-    console.log(selectedFavorite.current)
+  useEffect(() => {
+    setCatalog(movies)
+  }, [])
+
+  function handleAddFavorites(selectedFavorite) {
+    const myFavoritesId = favorites.map((favorites) => favorites.id)
+    if (
+      !myFavoritesId.includes(selectedFavorite.id) ||
+      myFavoritesId.length == 0
+    ) {
+      let updatedCatalog = catalog.filter(
+        (catalog) => catalog.id != selectedFavorite.id
+      )
+      setCatalog(updatedCatalog)
+      setFavorites((favorites) => [...favorites, selectedFavorite])
+    }
+  }
+
+  function handleRemoveFavorites(selectedFavorite) {
+    let updatedFavorites = favorites.filter(
+      (favorites) => favorites.id != selectedFavorite.id
+    )
+    let updatedCatalog = catalog
+    updatedCatalog.push(selectedFavorite)
+    setCatalog(updatedCatalog)
+    setFavorites(updatedFavorites)
   }
 
   function handleDetails(movieDetails) {
     setViewDetails(true)
     setDetails(movieDetails)
-    console.log(details)
   }
 
   return (
@@ -51,21 +72,28 @@ export default function Home({ movies }) {
       <main>
         <h1 className="appTitle">Welcome to Movie Mania!</h1>
 
+        {catalog.length == 0 && <h3>Nice! You liked all the movies!</h3>}
         {viewDetails ? (
-          <MovieDetails movie={details} setViewDetails={setViewDetails} />
+          <MovieDetails
+            key="movieDetails"
+            movie={details}
+            setViewDetails={setViewDetails}
+          />
         ) : (
           <>
             <div className={styles.list}>
               <Grid
                 justifyItems="center"
-                templateColumns="repeat(5, 0.16fr)"
+                templateColumns="repeat(6, 0.16fr)"
                 gap={100}
               >
-                {movies?.map((movie, i) => (
+                {catalog?.map((movie, i) => (
                   <MoviesList
                     movie={movie}
                     key={i}
-                    addFavorite={(newFavorite) => handleFavorites(newFavorite)}
+                    addFavorite={(newFavorite) =>
+                      handleAddFavorites(newFavorite)
+                    }
                     showMovieDetails={(movieDetails) =>
                       handleDetails(movieDetails)
                     }
@@ -76,12 +104,28 @@ export default function Home({ movies }) {
             {session ? (
               <>
                 <h1>Your Favorites</h1>
-                <FavoriteMovies selectedFavorite={selectedFavorite} />
+                <div className={styles.list}>
+                  <Grid
+                    justifyItems="center"
+                    templateColumns="repeat(6, 0.16fr)"
+                    gap={100}
+                  >
+                    {favorites?.map((favorite, i) => (
+                      <FavoriteMovies
+                        favorite={favorite}
+                        key={i}
+                        removeFavorite={(newFavorite) =>
+                          handleRemoveFavorites(newFavorite)
+                        }
+                      />
+                    ))}
+                  </Grid>
+                </div>
               </>
             ) : (
               <>
                 <h1>Your Favorites</h1>
-                <FavoriteMovies selectedFavorite={selectedFavorite} />
+                <p>não tem</p>
               </>
             )}
           </>
@@ -109,7 +153,7 @@ export async function getServerSideProps(ctx) {
   return {
     props: {
       movies,
-      favorites: dataFavorites.message,
+      userFavorites: dataFavorites.message,
     },
   }
 }
