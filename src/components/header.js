@@ -11,67 +11,37 @@ export default function Header() {
 
   return (
     <header>
-      <noscript>
-        <style>{`.nojs-show { opacity: 1; top: 0; }`}</style>
-      </noscript>
-      <div className={styles.signedInStatus}>
-        <p
-          className={`nojs-show ${
-            !session && loading ? styles.loading : styles.loaded
-          }`}
-        >
-          {!session && (
+      <div className={styles.navBar}>
+        <div className={styles.appName}>
+          <Link href="/">
+            <a>Popcorn Factory</a>
+          </Link>
+        </div>
+        <div className={styles.navLinks}>
+          {session ? (
             <>
-              <span className={styles.notSignedInText}>
-                You are not signed in
-              </span>
-              <a
-                href={`/auth/signin`}
-                className="buttonPrimary"
-                onClick={(e) => {
-                  e.preventDefault()
-                  signIn()
-                }}
-              >
-                Sign in
-              </a>
-              <a className="buttonPrimary" href={`/`}>
-                Home
-              </a>
+              <Link href="">
+                <button className="buttonPrimary" onClick={() => signOut()}>
+                  Sign Out
+                </button>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link href="/auth/signin">
+                <button
+                  className="buttonPrimary"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    signIn()
+                  }}
+                >
+                  Sign In
+                </button>
+              </Link>
             </>
           )}
-          {session && (
-            <>
-              {session.user.image && (
-                <span
-                  style={{ backgroundImage: `url('${session.user.image}')` }}
-                  className={styles.avatar}
-                />
-              )}
-              <span className={styles.signedInText}>
-                <small>Signed in as</small>
-                <br />
-                <strong>{session.user.email || session.user.name}</strong>
-              </span>
-              <a
-                href={`/api/auth/signout`}
-                className={styles.button}
-                onClick={(e) => {
-                  e.preventDefault()
-                  signOut()
-                }}
-              >
-                Sign out
-              </a>
-              <a className={styles.button} href={`/`}>
-                Home
-              </a>
-              <a className={styles.button} href={`/api`}>
-                Challenge 3
-              </a>
-            </>
-          )}
-        </p>
+        </div>
       </div>
     </header>
   )

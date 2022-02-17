@@ -4,11 +4,56 @@ $main-accent: #4e4e4e;
 
 html,
 body {
-  height: 80vh;
+  height: 100%;
   width: 100%;
   padding: 0;
   margin: 0;
   font-family: Roboto;
+}
+html {
+  height: 100%;
+  width: 100%;
+  background: url(../public/bg_alt2.jpg) center fixed;
+  background-size: 100% auto;
+}
+body {
+  /* ff 3.6+ */
+  background: -moz-linear-gradient(
+    0deg,
+    rgba(0, 188, 212, 0) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
+
+  /* safari 5.1+,chrome 10+ */
+  background: -webkit-linear-gradient(
+    0deg,
+    rgba(0, 188, 212, 0) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
+
+  /* opera 11.10+ */
+  background: -o-linear-gradient(
+    0deg,
+    rgba(0, 188, 212, 0) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
+
+  /* ie 6-9 */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00BCD4', endColorstr='#000000', GradientType=1 );
+
+  /* ie 10+ */
+  background: -ms-linear-gradient(
+    0deg,
+    rgba(0, 188, 212, 0) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
+
+  /* global 94%+ browsers support */
+  background: linear-gradient(
+    0deg,
+    rgba(0, 188, 212, 0) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
 }
 
 a {
@@ -18,6 +63,10 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+h1 {
+  color: white;
 }
 
 label {
@@ -43,23 +92,17 @@ input .searchBar {
 }
 
 .buttonPrimary {
-  background-color: #346df1;
-  border-color: #346df1;
-  color: #fff;
+  background-color: #eae2b7;
+  border-color: #003049;
+  color: #003049;
   text-decoration: none;
-  padding: 0.7rem 1.4rem;
-  height: 10px;
+  padding: 0 1rem 0 1rem;
+  height: 2.5rem;
+  font-weight: bolder;
+  transition: all 0.5s ease;
 }
 
 .buttonPrimary:hover {
-  box-shadow: inset 0 0 5rem #8298cc;
-}
-
-.buttonSecondary {
-  background-color: #303030;
-  border-color: #303030;
-  color: #fff;
-  text-decoration: none;
-  padding: 0.7rem 1.4rem;
-  height: 10px;
+  box-shadow: inset 0 0 5rem #345769;
+  color: #eae2b7;
 }

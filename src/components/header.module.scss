@@ -1,63 +1,32 @@
-/* Set min-height to avoid page reflow while session loading */
-.signedInStatus {
-  display: block;
-  min-height: 4rem;
+.navBar {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 4rem;
+  align-items: center;
+  padding: 0 2rem;
+  background-color: #003049;
+  font-family: Roboto;
+  color: white;
+  border-radius: 0px 0px 20px 20px;
 }
 
-.loading,
-.loaded {
-  position: relative;
-  top: 0;
-  opacity: 1;
-  overflow: hidden;
-  border-radius: 0 0 0.6rem 0.6rem;
-  padding: 0.6rem 1rem;
-  margin: 0;
-  background-color: rgba(255, 255, 255, 0.486);
+.appName {
+  width: inherit;
+  height: inherit;
+  display: flex;
+  font-family: Pacifico;
+  font-size: 2rem;
 }
 
-.loading {
-  top: -2rem;
-  opacity: 0;
+.navLinks {
+  display: flex;
+  width: inherit;
+  height: inherit;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
 }
 
-.signedInText,
-.notSignedInText {
-  position: absolute;
-  padding-top: 0.8rem;
-  left: 1rem;
-  right: 6.5rem;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  display: inherit;
-  z-index: 1;
-  line-height: 1.3rem;
-}
-
-.signedInText {
-  padding-top: 0rem;
-  left: 4.6rem;
-}
-
-.avatar {
-  border-radius: 2rem;
-  float: left;
-  height: 2.8rem;
-  width: 2.8rem;
-  background-color: white;
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.navItems {
-  margin-bottom: 2rem;
-  padding: 0;
-  list-style: none;
-  text-align: center;
-}
-
-.navItem {
-  display: inline-block;
-  margin-right: 1rem;
+.loggedIn {
 }

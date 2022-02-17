@@ -1,7 +1,6 @@
 .container {
-  height: 100vh;
-  width: 100vw;
-  background-color: darkseagreen;
+  height: inherit;
+  width: inherit;
   padding: 0 2rem;
 }
 
@@ -27,48 +26,43 @@
   text-align: center;
 }
 
-.searchBar {
-  width: 400px;
-}
-
-.search {
-  width: 100%;
-  position: relative;
+.appBar {
   display: flex;
-}
-
-.searchTerm {
+  flex-direction: row;
   width: 100%;
-  border: 3px solid #00b4cc;
-  border-right: none;
-  padding: 5px;
-  height: 20px;
-  border-radius: 5px 0 0 5px;
+  align-items: center;
+  color: white;
+}
+
+.appName {
+  width: inherit;
+  height: inherit;
+  display: flex;
+  justify-content: flex-end;
+  font-family: Pacifico;
+  font-size: 1.5rem;
+}
+
+.searchBar {
+  width: inherit;
+  height: inherit;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.searchBar__input {
+  width: 30rem;
+  height: 2rem;
+  border-radius: 10px;
+  font-size: large;
+  padding-left: 1rem;
   outline: none;
-  color: #9dbfaf;
 }
 
-.searchTerm:focus {
-  color: #00b4cc;
-}
-
-.searchButton {
-  width: 40px;
-  height: 36px;
-  border: 1px solid #00b4cc;
-  background: #00b4cc;
+.searchBar__input::-webkit-input-placeholder {
   text-align: center;
-  color: #fff;
-  border-radius: 0 5px 5px 0;
-  cursor: pointer;
-  font-size: 20px;
 }
 
-/*Resize the wrap to see the search bar change!*/
-.wrap {
-  width: 30%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.searchBar__input:-moz-placeholder {
+  text-align: right;
 }

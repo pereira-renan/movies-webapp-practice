@@ -19,41 +19,45 @@ export default function SignIn({ providers, csrfToken }) {
   return (
     <div className={styles.page__container}>
       <Header />
-      <div className="appTitle">
-        <h1>Welcome to your Movie Mania page!</h1>
-      </div>
-      <div>
-        <form method="post" action="/api/auth/signin/email">
-          <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-          <label>
-            <div color="white">Log in using your address</div>
-            <br />
-            <input type="text" id="email" name="email" />
-          </label>
-          <button type="submit" className="buttonPrimary">
-            Sign in
-          </button>
-        </form>
-        {Object.values(providers).map((provider) => {
-          if (provider.name === "Email") {
-            return
-          }
-          return (
-            <>
-              <label>
-                <div color="white">
-                  or login with your social media
-                  <br />
+      <div className={styles.loginBox__body}>
+        <div className={styles.loginBox__container}>
+          <form method="post" action="/api/auth/signin/email">
+            <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+            <label>
+              <div className={styles.loginBox__text}>Log In</div>
+              <input
+                className={styles.loginBox__input}
+                type="text"
+                id="email"
+                name="email"
+                placeholder="your email here"
+              />
+            </label>
+            <button type="submit" className="buttonPrimary">
+              Sign in
+            </button>
+          </form>
+          <div className={styles.loginBox__line} />
+
+          {Object.values(providers).map((provider) => {
+            if (provider.name === "Email") {
+              return
+            }
+            return (
+              <>
+                <div key={provider.name}>
+                  <button
+                    type="input"
+                    className="buttonPrimary"
+                    onClick={() => signIn(provider.id)}
+                  >
+                    Sign in with {provider.name}
+                  </button>
                 </div>
-              </label>
-              <Box key={provider.name}>
-                <Button variant="outline" onClick={() => signIn(provider.id)}>
-                  Sign in with {provider.name}
-                </Button>
-              </Box>
-            </>
-          )
-        })}
+              </>
+            )
+          })}
+        </div>
       </div>
     </div>
   )

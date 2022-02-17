@@ -26,6 +26,7 @@ function HomeContent({ movies, userFavorites }) {
   const { favorites, setFavorites } = useContext(MoviesContext)
   const { data: session } = useSession()
   const { catalog, setCatalog } = useContext(MoviesContext)
+  const { filter, setFilter } = useContext(MoviesContext)
 
   useEffect(() => {
     setCatalog(movies)
@@ -70,9 +71,6 @@ function HomeContent({ movies, userFavorites }) {
       <Header />
 
       <main>
-        <h1 className="appTitle">Welcome to Movie Mania!</h1>
-
-        {catalog.length == 0 && <h3>Nice! You liked all the movies!</h3>}
         {viewDetails ? (
           <MovieDetails
             key="movieDetails"
@@ -81,24 +79,50 @@ function HomeContent({ movies, userFavorites }) {
           />
         ) : (
           <>
+            <div className={styles.appBar}>
+              <div className={styles.searchBar}>
+                <input
+                  className={styles.searchBar__input}
+                  id="filter"
+                  name="filter"
+                  type="text"
+                  value={filter}
+                  placeholder="type to search for something AWESOME"
+                  onChange={(event) => setFilter(event.target.value)}
+                />
+              </div>
+              <div className={styles.appName}>
+                <p>Welcome to the Factory!</p>
+              </div>
+            </div>
+            {catalog.length == 0 && (
+              <h3>Wow! You liked all of our movies, thats awesome!</h3>
+            )}
             <div className={styles.list}>
               <Grid
                 justifyItems="center"
                 templateColumns="repeat(6, 0.16fr)"
                 gap={100}
               >
-                {catalog?.map((movie, i) => (
-                  <MoviesList
-                    movie={movie}
-                    key={i}
-                    addFavorite={(newFavorite) =>
-                      handleAddFavorites(newFavorite)
-                    }
-                    showMovieDetails={(movieDetails) =>
-                      handleDetails(movieDetails)
-                    }
-                  />
-                ))}
+                {catalog
+                  ?.filter(
+                    (movie) =>
+                      movie.title
+                        .toLowerCase()
+                        .includes(filter.toLowerCase()) || filter === ""
+                  )
+                  .map((movie, i) => (
+                    <MoviesList
+                      movie={movie}
+                      key={i}
+                      addFavorite={(newFavorite) =>
+                        handleAddFavorites(newFavorite)
+                      }
+                      showMovieDetails={(movieDetails) =>
+                        handleDetails(movieDetails)
+                      }
+                    />
+                  ))}
               </Grid>
             </div>
             {session ? (
