@@ -1,6 +1,7 @@
 .movie {
   display: flex;
   flex-direction: row;
+  padding-top: 4rem;
   -webkit-animation: fadeIn 1s ease-in-out;
   -moz-animation: fadeIn 1s ease-in-out;
   -o-animation: fadeIn 1s ease-in-out;
@@ -26,16 +27,18 @@
   overflow: auto;
   max-height: 80vh;
   justify-content: space-between;
+  background-color: #002f49;
 }
 
 .heading {
-  color: brown;
+  color: #eae2b7;
   font-size: 1.5rem;
   font-weight: bold;
 }
 
 .text {
   font-size: 1.5rem;
+  color: white;
 }
 
 .detailsFooter {

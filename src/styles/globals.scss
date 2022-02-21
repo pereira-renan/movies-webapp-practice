@@ -54,6 +54,7 @@ body {
     rgba(0, 188, 212, 0) 0%,
     rgba(0, 0, 0, 1) 100%
   );
+  background-size: 100% auto;
 }
 
 a {
@@ -63,9 +64,28 @@ a {
 
 * {
   box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: #003049 #eae2b7;
 }
 
-h1 {
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #eae2b7;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #003049;
+  border-radius: 20px;
+  border: 3px solid #eae2b7;
+}
+
+h1,
+h2,
+h3 {
   color: white;
 }
 
@@ -105,4 +125,14 @@ input .searchBar {
 .buttonPrimary:hover {
   box-shadow: inset 0 0 5rem #345769;
   color: #eae2b7;
+}
+
+.flexRow__div {
+  display: flex;
+  flex-direction: row;
+}
+
+.flexColumn__div {
+  display: flex;
+  flex-direction: column;
 }

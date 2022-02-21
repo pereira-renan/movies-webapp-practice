@@ -18,7 +18,9 @@ export default async function handler(req, res) {
   async function getMoviesAndUpdateDatabase(req, res) {
     try {
       let maxPages = 5
-      var movies = { catalog: [] }
+      var movies = {}
+      var catalog = []
+      var moviesByPage = []
       let catalogMoviesCount = 0
       for (let pageNumber = 1; pageNumber <= maxPages; pageNumber++) {
         let data = await fetch(
@@ -29,11 +31,11 @@ export default async function handler(req, res) {
         )
 
         let response = await data.json()
-        movies.catalog.push(response.results)
-        catalogMoviesCount =
-          catalogMoviesCount + movies.catalog[pageNumber - 1].length
+        moviesByPage = response.results
+        catalog.push(...response.results)
       }
-      movies["moviesCount"] = catalogMoviesCount
+      movies["catalog"] = catalog
+      movies["moviesCount"] = catalog.length
 
       let dateNow = new Date().toLocaleString()
       movies["lastUpdated"] = dateNow
@@ -43,8 +45,7 @@ export default async function handler(req, res) {
       await db.collection("movies").insertOne(movies)
 
       res.status(200).json({
-        message: `DB erased and ${catalogMoviesCount} movies added.`,
-        data: movies,
+        message: `Updated. Collection erased and ${catalog.length} movies added.`,
       })
 
       //      return res.status(200).json({

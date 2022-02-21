@@ -12,20 +12,46 @@ export default async function handler(req, res) {
     case "GET": {
       return getFavorites(req, res)
     }
+    case "POST": {
+      return updateFavorites(req, res)
+    }
   }
 
-  console.log(session)
   // Getting all posts.
   async function getFavorites(req, res) {
+    let userEmail = req.headers.email
     try {
       let db = await connectDb()
-      let data = await db
-        .collection("users")
-        .findOne({ email: "souzapereira.renan@gmail.com" })
+      let data = await db.collection("users").findOne({ email: userEmail })
+      let userFavorites = data.favorites
 
       return res.status(200).json({
-        message: data.favorites,
+        userFavorites,
         success: true,
+      })
+    } catch (error) {
+      return res.json({
+        message: new Error(error).message,
+        success: false,
+      })
+    }
+  }
+
+  async function updateFavorites(req, res) {
+    try {
+      let db = await connectDb()
+      let body = JSON.parse(req.body)
+
+      await db
+        .collection("users")
+        .updateOne(
+          { email: body.email },
+          { $set: { favorites: body.favorites } }
+        )
+
+      return res.status(200).json({
+        success: true,
+        body,
       })
     } catch (error) {
       return res.json({

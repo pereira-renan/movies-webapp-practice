@@ -1,10 +1,30 @@
 import styles from "./MovieDetails.module.scss"
 import { useSession } from "next-auth/react"
 import { BiArrowBack, BiHeart } from "react-icons/bi"
+import { useContext } from "react"
+import { MoviesContext } from "../lib/context"
 
 export default function MovieDetails({ movie, setViewDetails }) {
+  const { favorites, catalog, setUpdating, setCatalog, setFavorites } =
+    useContext(MoviesContext)
+
+  function handleAddFavorites(selectedFavorite) {
+    setUpdating(1)
+    const myFavoritesId = favorites.map((favorites) => favorites.id)
+    if (
+      !myFavoritesId.includes(selectedFavorite.id) ||
+      myFavoritesId.length == 0
+    ) {
+      let updatedCatalog = catalog.filter(
+        (catalog) => catalog.id != selectedFavorite.id
+      )
+      setCatalog(updatedCatalog)
+      setFavorites((favorites) => [...favorites, selectedFavorite])
+    }
+    return
+  }
+
   const { data: session } = useSession()
-  const heartSize = "30px"
   return (
     <div className={styles.movie}>
       <div className={styles.poster}>
@@ -49,7 +69,11 @@ export default function MovieDetails({ movie, setViewDetails }) {
               {session && (
                 <>
                   <div onClick={() => console.log("heart")}>
-                    <BiHeart size="50px" className={styles.likeIcon} />
+                    <BiHeart
+                      size="50px"
+                      className={styles.likeIcon}
+                      onClick={() => handleAddFavorites(movie)}
+                    />
                   </div>
                 </>
               )}

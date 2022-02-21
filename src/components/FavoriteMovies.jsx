@@ -1,6 +1,6 @@
 import styles from "./MoviesList.module.scss"
 import { useContext } from "react"
-import { MoviesContext } from "../pages/context"
+import { MoviesContext } from "../lib/context"
 import { FaHeartBroken, FaHeart } from "react-icons/fa"
 import { BsHeart, BsHeartFill, BsInfoCircleFill } from "react-icons/bs"
 import { AiFillStar } from "react-icons/ai"

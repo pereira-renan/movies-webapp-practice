@@ -12,11 +12,30 @@ export default function Header() {
   return (
     <header>
       <div className={styles.navBar}>
-        <div className={styles.appName}>
+        {session ? (
+          <>
+            <Link href="/">
+              <a>
+                <div className={styles.logo__container}>
+                  <div className={styles.logo__text}>
+                    Welcome to the Popcorn Factory, Renan!
+                  </div>
+                  <div className={styles.logo__img}></div>
+                </div>
+              </a>
+            </Link>
+          </>
+        ) : (
           <Link href="/">
-            <a>Popcorn Factory</a>
+            <a>
+              <div className={styles.logo__container}>
+                <div className={styles.logo__text}>Popcorn </div>
+                <div className={styles.logo__img}></div>
+                <div className={styles.logo__text}>Factory</div>
+              </div>
+            </a>
           </Link>
-        </div>
+        )}
         <div className={styles.navLinks}>
           {session ? (
             <>

@@ -9,6 +9,8 @@ function MoviesProvider({ children }) {
   const [catalog, setCatalog] = useState([])
   const selectedFavorite = useRef({})
   const [filter, setFilter] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [updating, setUpdating] = useState("")
 
   return (
     <MoviesContext.Provider
@@ -24,6 +26,10 @@ function MoviesProvider({ children }) {
         selectedFavorite,
         filter,
         setFilter,
+        loading,
+        setLoading,
+        updating,
+        setUpdating,
       }}
     >
       {children}

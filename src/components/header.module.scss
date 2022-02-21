@@ -11,14 +11,6 @@
   border-radius: 0px 0px 20px 20px;
 }
 
-.appName {
-  width: inherit;
-  height: inherit;
-  display: flex;
-  font-family: Pacifico;
-  font-size: 2rem;
-}
-
 .navLinks {
   display: flex;
   width: inherit;
@@ -28,5 +20,44 @@
   justify-content: flex-end;
 }
 
-.loggedIn {
+.logo__container {
+  width: max-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.logo__text {
+  font-family: Pacifico;
+  font-size: 1.5rem;
+  width: max-content;
+}
+
+.logo__img {
+  background: url(../public/popcorn.png);
+  border-radius: 2rem;
+  height: 2.8rem;
+  width: 2.8rem;
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: Pacifico;
+}
+
+.navSession {
+  display: flex;
+  width: inherit;
+  height: inherit;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.avatar {
+  border-radius: 2rem;
+  float: left;
+  height: 2.8rem;
+  width: 2.8rem;
+  background-color: white;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
